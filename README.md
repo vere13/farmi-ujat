@@ -1,3 +1,3 @@
 # FARMI-UJAT
 
-Ejemplo del_deployment_ de una aplicacion en **Flet**.
+Ejemplo del deployment_ de una aplicacion en **Flet**.
