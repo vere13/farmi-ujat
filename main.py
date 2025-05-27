@@ -1,5 +1,7 @@
 import flet as ft
 import consulta_airtable as cat
+import consulta as con  
+
 
 def main(page: ft.Page):
 
@@ -101,7 +103,8 @@ def main(page: ft.Page):
         ),
         bgcolor="white",
         color="white",
-        width=400
+        width=400,
+        on_click=lambda e: con.main(e.page)
     )
 
     fila_botones = ft.Row(
