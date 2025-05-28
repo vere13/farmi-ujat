@@ -9,6 +9,10 @@ def main(page: ft.Page):
         page.clean()
         cat.main(page)
 
+    def mostrar_consultas(e: ft.ControlEvent):
+        page.clean()
+        con.main(page)
+
     page.title = "FARMI-UJAT"
     page.bgcolor = "white"  # Fondo blanco
    
@@ -104,7 +108,7 @@ def main(page: ft.Page):
         bgcolor="white",
         color="white",
         width=400,
-        on_click=lambda e: con.main(e.page)
+        on_click=mostrar_consultas
     )
 
     fila_botones = ft.Row(
