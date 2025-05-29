@@ -1,6 +1,6 @@
 import flet as ft
 import consulta_airtable as cat
-import consulta as con  
+ 
 
 
 def main(page: ft.Page):
@@ -8,10 +8,6 @@ def main(page: ft.Page):
     def mostrar_interacciones(e: ft.ControlEvent):
         page.clean()
         cat.main(page)
-
-    def mostrar_consultas(e: ft.ControlEvent):
-        page.clean()
-        con.main(page)
 
     page.title = "FARMI-UJAT"
     page.bgcolor = "white"  # Fondo blanco
@@ -107,8 +103,8 @@ def main(page: ft.Page):
         ),
         bgcolor="white",
         color="white",
-        width=400,
-        on_click=mostrar_consultas
+        width=400
+        
     )
 
     fila_botones = ft.Row(
