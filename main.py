@@ -1,21 +1,21 @@
 import flet as ft
 import consulta_airtable as cat
-import altas_medicamentos as am 
-import consulta as con
+import altas_farmaco as alf
+import lista_medicamento as lis
 
 def main(page: ft.Page):
 
     def mostrar_interacciones(e: ft.ControlEvent):
         page.clean()
         cat.main(page)
-
+    
     def mostrar_medicamentos(e: ft.ControlEvent):
         page.clean()
-        am.main(page)
+        alf.main(page)
     
     def mostrar_consulta(e: ft.ControlEvent):
         page.clean()
-        con.main(page)
+        lis.main(page)
 
     page.title = "FARMI-UJAT"
     page.bgcolor = "white"  # Fondo blanco
