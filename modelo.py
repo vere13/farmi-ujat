@@ -1,62 +1,39 @@
 import peewee as pw
-from peewee import IntegrityError
 
-# Conexión correcta a SQLite
-farmacia_ujat = pw.SqliteDatabase("Farmacia_ujat_P3.db")
+# Conexión a la base de datos en Neon
+farmacia_ujat = pw.PostgresqlDatabase(
+    'neondb',
+    user='neondb_owner',
+    password='npg_rtza0QeXhy2C',
+    host='ep-winter-shape-a4p17xtq-pooler.us-east-1.aws.neon.tech',
+    port=5432,
+    sslmode='require'
+)
 
 # Modelo Farmaco
 class Farmaco(pw.Model):
     nombre = pw.CharField(max_length=255, primary_key=True)
     descripcion = pw.CharField(max_length=255)
-    categoria = pw.CharField(max_length=250)
-    interacciones = pw.CharField(max_length=5000, null=True)  # Interacciones con otros medicamentos
+    categoria = pw.CharField(max_length=255)
+    interacciones = pw.CharField(max_length=5000, null=True)
 
     class Meta:
-        database = farmacia_ujat
+        database = farmacia_ujat  # ← CORRECTO
 
 # Modelo Medicamento
 class Medicamento(pw.Model):
     id = pw.IntegerField(primary_key=True)
     clave = pw.CharField(max_length=255)
-    descripcion = pw.CharField(max_length=100)
+    descripcion = pw.CharField(max_length=255)
     presentacion = pw.CharField(max_length=255)
     clasificacion = pw.CharField(max_length=255)
     nivel_atencion = pw.CharField(max_length=255)
     nombre_farmaco = pw.ForeignKeyField(
+        Farmaco,
+        field=Farmaco.nombre,
         column_name="nombre_farmaco",
-        model=Farmaco,
-        field="nombre",
         null=True
     )
 
     class Meta:
         database = farmacia_ujat
-
-# Crear tablas si no existen
-farmacia_ujat.connect()
-farmacia_ujat.create_tables([Farmaco, Medicamento])
-
-# Función para guardar un fármaco
-def guardar_farmaco(nombre, descripcion, categoria, interacciones):
-    try:
-        if Farmaco.select().where(Farmaco.nombre == nombre).exists():
-            print("Ya existe un fármaco con ese nombre.")
-            return "duplicado"
-
-        Farmaco.create(
-            nombre=nombre,
-            descripcion=descripcion,
-            categoria=categoria,
-            interacciones=interacciones
-        )
-        print("Fármaco guardado con éxito.")
-        return "exito"
-
-    except IntegrityError as e:
-        print(f"Error de integridad: {e}")
-        return "error"
-
-    except Exception as e:
-        print(f"Otro error: {e}")
-        return "error"
-
