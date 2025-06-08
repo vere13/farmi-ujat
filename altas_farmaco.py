@@ -9,7 +9,7 @@ def main(page: ft.Page):
     page.window_resizable = False
     page.appbar = ft.AppBar(
         leading=ft.Icon("medical_services"),
-        title=ft.Text("Nuevo fármaco"),
+        title=ft.Text("Nuevo Medicamento"),
         center_title=True,
         bgcolor="green",
         color="white"
