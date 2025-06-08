@@ -11,8 +11,8 @@ def main(page: ft.Page):
     
     #Componentes de la página
     encabezado = [
-        ft.DataColumn(ft.Text("Medicamento")),
-        ft.DataColumn(ft.Text("Interacciones")) 
+        ft.DataColumn(ft.Text("Medicamento",  weight="bold")),
+        ft.DataColumn(ft.Text("Interacciones",  weight="bold")) 
     ]
     filas = []
     datos = nb.Receta.all()
